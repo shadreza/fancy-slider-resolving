@@ -24,7 +24,6 @@ const showImages = (images) => {
     div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
     gallery.appendChild(div)
   })
-
 }
 
 const getImages = (query) => {
@@ -118,6 +117,17 @@ searchBtn.addEventListener('click', function () {
   const search = document.getElementById('search');
   getImages(search.value)
   sliders.length = 0;
+})
+
+// added functionality to the enter key when in focus in the search bar 
+document.getElementById('search').addEventListener( 'keyup' , event =>{
+  if(event.keyCode===13){
+    document.querySelector('.main').style.display = 'none';
+    clearInterval(timer);
+    const search = document.getElementById('search');
+    getImages(search.value)
+    sliders.length = 0;
+}
 })
 
 sliderBtn.addEventListener('click', function () {
