@@ -4,6 +4,10 @@ const galleryHeader = document.querySelector('.gallery-header');
 const searchBtn = document.getElementById('search-btn');
 const sliderBtn = document.getElementById('create-slider');
 const sliderContainer = document.getElementById('sliders');
+
+// onstart the loading bubble will be set to none
+document.getElementById('spinnerForShowingLoading').style.display='none';
+
 // selected image 
 let sliders = [];
 
@@ -14,6 +18,13 @@ const KEY = '15674931-a9d714b6e9d654524df198e00&q';
 
 // show images 
 const showImages = (images) => {
+
+  // if the searched data doesn't have any content [invalid input / wrong input] then it will not proceed forward and alert the user and the value of the search box will get reset
+  if(images.length==0){
+    alert('No Images Found!\n\nPlease Check your input');
+    document.getElementById('search').value='';
+    return;
+  }
   imagesArea.style.display = 'block';
   gallery.innerHTML = '';
   // show gallery title
