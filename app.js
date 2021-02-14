@@ -26,10 +26,49 @@ const showImages = (images) => {
   // show gallery title
   galleryHeader.style.display = 'flex';
   images.forEach(image => {
+
+    // added hovering functionality that shows views and likes of the hovered pic
+    const numberOfViews = image.views;
+    const numberOfLikes = image.likes;
+    let bigDiv = document.createElement('div');
+    bigDiv.innerHTML='';
     let div = document.createElement('div');
-    div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
-    div.innerHTML = ` <img class="img-fluid img-thumbnail" id='imageThatWillLoad' onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
-    gallery.appendChild(div);
+    div.id="imageThatWillLoad";
+    bigDiv.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
+    div.innerHTML = `
+    <img style="width:100%;height:100%" class="img-fluid img-thumbnail hoveringClass" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">
+    `;
+    let label = 0;
+    bigDiv.appendChild(div);
+    const picInfoDiv = document.createElement('div');
+    picInfoDiv.id="pictureInfo";
+    picInfoDiv.innerHTML=`
+      <img src="like.png" alt="" style="width:20px;height:20px">
+      <small id="numberOfViewsOfThePhoto">${numberOfLikes}</small>
+      <span id="gapSpan"></span>
+      <img src="views.png" alt="" style="width:20px;height:20px">
+      <small id="numberOfViewsOfThePhoto">${numberOfViews}</small>
+    `
+    div.addEventListener('mouseenter',function(){
+      if(label===0){
+        bigDiv.appendChild(picInfoDiv);
+        label++;
+      }
+      else{
+        label=1;
+        return;
+      }
+    })
+    div.addEventListener('mouseleave',function(){
+      if(label===1){
+        bigDiv.removeChild(picInfoDiv);
+        label=0;
+      }
+      else{
+        return;
+      }
+    })
+    gallery.appendChild(bigDiv);
   })
 }
 
@@ -78,19 +117,7 @@ const createSlider = () => {
     alert('Select at least 2 image.')
     return;
   }
-  // crate slider previous next area
-  sliderContainer.innerHTML = '';
-  const prevNext = document.createElement('div');
-  prevNext.className = "prev-next d-flex w-100 justify-content-between align-items-center";
-  prevNext.innerHTML = ` 
-    <span class="prev" onclick="changeItem(-1)"><i class="fas fa-chevron-left"></i></span>
-    <span class="next" onclick="changeItem(1)"><i class="fas fa-chevron-right"></i></span>
-  `;
 
-  sliderContainer.appendChild(prevNext);
-  document.querySelector('.main').style.display = 'block';
-  // hide image area
-  imagesArea.style.display = 'none';
   // error checking the duration time
   let duration = document.getElementById('duration').value;
   if(duration<0){
@@ -110,6 +137,21 @@ const createSlider = () => {
   }
 
   duration *= 1000;
+
+  // crate slider previous next area
+  sliderContainer.innerHTML = '';
+  const prevNext = document.createElement('div');
+  prevNext.className = "prev-next d-flex w-100 justify-content-between align-items-center";
+  prevNext.innerHTML = ` 
+    <span class="prev" onclick="changeItem(-1)"><i class="fas fa-chevron-left"></i></span>
+    <span class="next" onclick="changeItem(1)"><i class="fas fa-chevron-right"></i></span>
+  `;
+
+  sliderContainer.appendChild(prevNext);
+  document.querySelector('.main').style.display = 'block';
+  // hide image area
+  imagesArea.style.display = 'none';
+
   // resetting the duration input box value when one slider is made
   document.getElementById('duration').value='';
 
@@ -158,7 +200,11 @@ const searchingFunction = () => {
   document.querySelector('.main').style.display = 'none';
   clearInterval(timer);
   const search = document.getElementById('search');
-  getImages(search.value)
+  if(search.value==''){
+    alert('Nothing Input\n\nPlease Input For Searching');
+    return;
+  }
+  getImages(search.value);
   sliders.length = 0;
 }
 
@@ -182,4 +228,9 @@ document.getElementById('duration').addEventListener('keyup' , event => {
   if(event.keyCode===13){
     createSlider();
   }
+})
+
+document.getElementById('goToHomeButton').addEventListener('click', function(){
+  document.getElementById('search').value='';
+  document.getElementById('sliderId').style.display='none';
 })

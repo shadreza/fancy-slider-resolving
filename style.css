@@ -1,3 +1,7 @@
+body{
+  margin-top: 3rem;
+}
+
 #sliders {
   height: 400px;
   width: 60%;
@@ -63,4 +67,17 @@ img {
     height: 300px;
     width: 90%;
   }
+}
+
+.buttonsGroup{
+  margin: 1rem auto;
+  width: 100%;
+}
+
+#gapSpan{
+  margin: 0 10px;
+}
+
+.hoveringClass:hover{
+  
 }

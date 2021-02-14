@@ -16,11 +16,12 @@
 </head>
 
 <body>
+
   <div class="container">
     <h4 class="mt-2 text-center">Search Image for create slider</h4>
     <div class="form-inline mt-3 d-flex justify-content-center">
       <div class="input-group col-md-6 mb-2">
-        <input type="text" class="form-control" id="search" placeholder="nature">
+        <input type="text" class="form-control" id="search" placeholder="quran">
       </div>
       <button type="button" id="search-btn" class="btn btn-primary mb-2">Search</button>
     </div>
@@ -38,15 +39,25 @@
       </div>
     </section>
     <!-- slider -->
-    <div class="main">
+    <div class="main" id="sliderId">
       <section class="mt-5" id="sliders">
 
       </section>
-      <div class="dots d-flex mt-2 w-100 justify-content-center align-items-center bg-light">
+      <div id="sliderDotImageCount" class="dots d-flex mt-2 w-100 justify-content-center align-items-center bg-light">
         <span class="dot" onclick="changeItem(-1)"></span>
         <span class="dot" onclick="changeItem(1)"></span>
       </div>
+
+      <div class="d-flex justify-content-evenly container buttonsGroup">
+        <button type="button" id="goToHomeButton" class="btn btn-primary">Go To Home</button>
+        <button type="button" id="playSliderButton" class="btn btn-secondary">Play Slider</button>
+        <button type="button" id="pauseSliderButton" class="btn btn-success">Pause Slider</button>
+      </div>
+      
     </div>
+
+
+
   </div>
   
   <!-- Optional JavaScript -->
