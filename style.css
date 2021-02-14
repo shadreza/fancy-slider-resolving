@@ -64,9 +64,3 @@ img {
     width: 90%;
   }
 }
-
-#spinnerForShowingLoading{
-  position: relative;
-  top: 12rem;
-  display: none;
-}

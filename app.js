@@ -5,9 +5,6 @@ const searchBtn = document.getElementById('search-btn');
 const sliderBtn = document.getElementById('create-slider');
 const sliderContainer = document.getElementById('sliders');
 
-// onstart the loading bubble will be set to none
-document.getElementById('spinnerForShowingLoading').style.display='none';
-
 // selected image 
 let sliders = [];
 
@@ -18,7 +15,6 @@ const KEY = '15674931-a9d714b6e9d654524df198e00&q';
 
 // show images 
 const showImages = (images) => {
-
   // if the searched data doesn't have any content [invalid input / wrong input] then it will not proceed forward and alert the user and the value of the search box will get reset
   if(images.length==0){
     alert('No Images Found!\n\nPlease Check your input');
@@ -32,8 +28,8 @@ const showImages = (images) => {
   images.forEach(image => {
     let div = document.createElement('div');
     div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
-    div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
-    gallery.appendChild(div)
+    div.innerHTML = ` <img class="img-fluid img-thumbnail" id='imageThatWillLoad' onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
+    gallery.appendChild(div);
   })
 }
 
@@ -96,8 +92,9 @@ const createSlider = () => {
   // error checking the duration time
   let duration = document.getElementById('duration').value;
   if(duration<0){
-    alert('Slider Changing Time Can not be Negative.\n\nSetting the default time as 3sec');
-    duration=3000;
+    alert('Slider Changing Time Can not be Negative.');
+    document.getElementById('duration').value='';
+    return;
   }
   else if(duration==0){
     alert('Slider Changing Time Can not be Zero.\n\nSetting the default time as 3sec');
