@@ -79,6 +79,10 @@ const createSlider = () => {
     alert('Slider Changing Time Can not be Zero.\n\nSetting the default time as 3sec');
     duration=3000;
   }
+
+  // resetting the duration input box value when one slider is made
+  document.getElementById('duration').value='';
+  
   sliders.forEach(slide => {
     let item = document.createElement('div')
     item.className = "slider-item";
@@ -140,5 +144,12 @@ document.getElementById('search').addEventListener( 'keyup' , event => {
 })
 
 sliderBtn.addEventListener('click', function () {
-  createSlider()
+  createSlider();
+})
+
+// added enter button functionality in the duration input box
+document.getElementById('duration').addEventListener('keyup' , event => {
+  if(event.keyCode===13){
+    createSlider();
+  }
 })
