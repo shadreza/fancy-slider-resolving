@@ -13,3 +13,5 @@
 
 11. Added likes and views with hover effect
 12. Added Spinner Functionality
+13. Added Go To HomePage Button from slider page
+14. Added Pause & Resume Slider Button

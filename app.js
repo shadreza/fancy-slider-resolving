@@ -8,7 +8,28 @@ const sliderContainer = document.getElementById('sliders');
 // selected image 
 let sliders = [];
 
-// let willPassOrNot = false;
+// this is for knowing if the slider will change or not
+let willPassOrNot = false;
+
+// changing the properties and inner content of the button for resuming or pausing the slider
+const changingOfTheProperties = () => {
+  if(willPassOrNot === false && document.getElementById('buttonToPauseOrResumeSlider').textContent==='Pause Slider'){
+    willPassOrNot = true;
+    document.getElementById('buttonToPauseOrResumeSlider').textContent='Resume Slider';
+    console.log('in');
+  }
+  else if(willPassOrNot === true && document.getElementById('buttonToPauseOrResumeSlider').textContent==='Resume Slider'){
+    willPassOrNot = false;
+    document.getElementById('buttonToPauseOrResumeSlider').textContent='Pause Slider';
+    console.log('out');
+  }
+}
+
+// resume or pause button clicker
+document.getElementById('buttonToPauseOrResumeSlider').addEventListener('click' , () => {
+  changingOfTheProperties();
+});
+
 
 // If this key doesn't work
 // Find the name in the url and go to their website
@@ -110,7 +131,6 @@ let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
   element.classList.add('added');
- 
   let item = sliders.indexOf(img);
   if (item === -1) {
     sliders.push(img);
@@ -175,11 +195,12 @@ const createSlider = () => {
     alt="">`;
     sliderContainer.appendChild(item);
   })
-  changeSlide(0)
+  changeSlide(0);
   timer = setInterval(function () {
-    // while(willPassOrNot){
-
-    // }
+    // making slider pause on the current image
+    if(willPassOrNot){
+      slideIndex--;
+    }
     slideIndex++;
     changeSlide(slideIndex);
   }, duration);
@@ -250,3 +271,9 @@ document.getElementById('duration').addEventListener('keyup' , event => {
 const displayOrHideSpinner = property => {
   document.getElementById('spinnerInProgressId').style.display=property;
 }
+
+// added go to homepage button
+document.getElementById('buttonToGoToHomePage').addEventListener('click',()=>{
+  document.getElementById('sliderId').style.display='none';
+  document.getElementById('search').value='';
+})
