@@ -32,7 +32,20 @@ const getImages = (query) => {
     // spelling needs to be hits rather than hitS
     // solved image loading
     .then(data => showImages(data.hits))
-    .catch(err => console.log(err))
+    .catch(err => {
+      console.log(err);
+      // alerting the user whether there is net connection or not
+      const onlineOrOffline = window.navigator.onLine;
+      if(!onlineOrOffline){
+        alert('Please Check Your Internet Connection');
+        return;
+      }
+      // alerting user if the data is not getting for any reasons from the server
+      else{
+        alert('The Server is facing some issues!\n\nPlease Try Again Later');
+        return;
+      }
+    })
 }
 
 let slideIndex = 0;
@@ -82,14 +95,14 @@ const createSlider = () => {
 
   // resetting the duration input box value when one slider is made
   document.getElementById('duration').value='';
-  
+
   sliders.forEach(slide => {
     let item = document.createElement('div')
     item.className = "slider-item";
     item.innerHTML = `<img class="w-100"
     src="${slide}"
     alt="">`;
-    sliderContainer.appendChild(item)
+    sliderContainer.appendChild(item);
   })
   changeSlide(0)
   timer = setInterval(function () {
