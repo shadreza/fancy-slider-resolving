@@ -69,7 +69,16 @@ const createSlider = () => {
   document.querySelector('.main').style.display = 'block';
   // hide image aria
   imagesArea.style.display = 'none';
-  const duration = document.getElementById('duration').value || 1000;
+  // error checking the duration time
+  let duration = document.getElementById('duration').value;
+  if(duration<0){
+    alert('Slider Changing Time Can not be Negative.\n\nSetting the default time as 3sec');
+    duration=3000;
+  }
+  else if(duration==0){
+    alert('Slider Changing Time Can not be Zero.\n\nSetting the default time as 3sec');
+    duration=3000;
+  }
   sliders.forEach(slide => {
     let item = document.createElement('div')
     item.className = "slider-item";
