@@ -120,23 +120,23 @@ const changeSlide = (index) => {
   items[index].style.display = "block"
 }
 
-searchBtn.addEventListener('click', function () {
+const searchingFunction = () => {
   document.querySelector('.main').style.display = 'none';
   clearInterval(timer);
   const search = document.getElementById('search');
   getImages(search.value)
   sliders.length = 0;
+}
+
+searchBtn.addEventListener('click', function () {
+  searchingFunction();
 })
 
-// added functionality to the enter key when in focus in the search bar 
-document.getElementById('search').addEventListener( 'keyup' , event =>{
+// searching functionality when keyup is happening or we can say when the search box is modified
+document.getElementById('search').addEventListener( 'keyup' , event => {
   if(event.keyCode===13){
-    document.querySelector('.main').style.display = 'none';
-    clearInterval(timer);
-    const search = document.getElementById('search');
-    getImages(search.value)
-    sliders.length = 0;
-}
+    searchingFunction();
+  }
 })
 
 sliderBtn.addEventListener('click', function () {
