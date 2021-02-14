@@ -8,6 +8,8 @@ const sliderContainer = document.getElementById('sliders');
 // selected image 
 let sliders = [];
 
+// let willPassOrNot = false;
+
 // If this key doesn't work
 // Find the name in the url and go to their website
 // to create your own api key
@@ -19,6 +21,7 @@ const showImages = (images) => {
   if(images.length==0){
     alert('No Images Found!\n\nPlease Check your input');
     document.getElementById('search').value='';
+    displayOrHideSpinner('none');
     return;
   }
   imagesArea.style.display = 'block';
@@ -56,6 +59,7 @@ const showImages = (images) => {
       }
       else{
         label=1;
+        displayOrHideSpinner('none');
         return;
       }
     })
@@ -65,6 +69,7 @@ const showImages = (images) => {
         label=0;
       }
       else{
+        displayOrHideSpinner('none');
         return;
       }
     })
@@ -76,6 +81,7 @@ const showImages = (images) => {
 
 const getImages = (query) => {
   // spinner is showing
+  gallery.innerHTML='';
   displayOrHideSpinner('block');
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
@@ -88,11 +94,13 @@ const getImages = (query) => {
       const onlineOrOffline = window.navigator.onLine;
       if(!onlineOrOffline){
         alert('Please Check Your Internet Connection');
+        displayOrHideSpinner('block');
         return;
       }
       // alerting user if the data is not getting for any reasons from the server
       else{
         alert('The Server is facing some issues!\n\nPlease Try Again Later');
+        displayOrHideSpinner('block');
         return;
       }
     })
@@ -118,7 +126,7 @@ var timer
 const createSlider = () => {
   // check slider image length
   if (sliders.length < 2) {
-    alert('Select at least 2 image.')
+    alert('Select at least 2 image.');
     return;
   }
 
@@ -169,6 +177,9 @@ const createSlider = () => {
   })
   changeSlide(0)
   timer = setInterval(function () {
+    // while(willPassOrNot){
+
+    // }
     slideIndex++;
     changeSlide(slideIndex);
   }, duration);
@@ -206,6 +217,7 @@ const searchingFunction = () => {
   const search = document.getElementById('search');
   if(search.value==''){
     alert('Nothing Input\n\nPlease Input For Searching');
+    displayOrHideSpinner('none');
     return;
   }
   getImages(search.value);
