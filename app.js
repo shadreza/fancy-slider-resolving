@@ -64,7 +64,9 @@ const selectItem = (event, img) => {
   if (item === -1) {
     sliders.push(img);
   } else {
-    alert('Hey, Already added !')
+    // if one selected item is clicked again then it will be removed
+    sliders.splice(item , 1);
+    element.classList.remove('added');
   }
 }
 
@@ -87,7 +89,7 @@ const createSlider = () => {
 
   sliderContainer.appendChild(prevNext);
   document.querySelector('.main').style.display = 'block';
-  // hide image aria
+  // hide image area
   imagesArea.style.display = 'none';
   // error checking the duration time
   let duration = document.getElementById('duration').value;
@@ -98,9 +100,16 @@ const createSlider = () => {
   }
   else if(duration==0){
     alert('Slider Changing Time Can not be Zero.\n\nSetting the default time as 3sec');
-    duration=3000;
+    duration=3;
+  }
+  // if not a number then it won't be passed
+  else if(isNaN(duration)){
+    alert('Slider Timer Input Not A Number\n\nPlease Input a valid positive number');
+    document.getElementById('duration').value='';
+    return;
   }
 
+  duration *= 1000;
   // resetting the duration input box value when one slider is made
   document.getElementById('duration').value='';
 

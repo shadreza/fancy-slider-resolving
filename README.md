@@ -8,3 +8,5 @@
 6. resetting the duration input box value when one slider is made
 7. added alert for the user whether there is net connection or not OR data is not getting for any reasons from the server
 8. if the input doesn't get any relevant searches then it will alert the user , reset the value of the search box and return
+9. if one selected item is clicked again then it will be removed
+10. if set timer is not number then it won't be passed
