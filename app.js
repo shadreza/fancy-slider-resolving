@@ -70,9 +70,13 @@ const showImages = (images) => {
     })
     gallery.appendChild(bigDiv);
   })
+  // spinner will be hided
+  displayOrHideSpinner('none');
 }
 
 const getImages = (query) => {
+  // spinner is showing
+  displayOrHideSpinner('block');
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
     // spelling needs to be hits rather than hitS
@@ -230,7 +234,7 @@ document.getElementById('duration').addEventListener('keyup' , event => {
   }
 })
 
-document.getElementById('goToHomeButton').addEventListener('click', function(){
-  document.getElementById('search').value='';
-  document.getElementById('sliderId').style.display='none';
-})
+// spinner will be shown or hodden through property
+const displayOrHideSpinner = property => {
+  document.getElementById('spinnerInProgressId').style.display=property;
+}

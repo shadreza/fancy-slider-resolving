@@ -78,6 +78,10 @@ img {
   margin: 0 10px;
 }
 
-.hoveringClass:hover{
-  
+.spinnerInProgress{
+  z-index: 1;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  display: none;
 }

@@ -12,3 +12,4 @@
 10. if set timer is not number then it won't be passed
 
 11. Added likes and views with hover effect
+12. Added Spinner Functionality
