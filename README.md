@@ -15,3 +15,7 @@
 12. Added Spinner Functionality
 13. Added Go To HomePage Button from slider page
 14. Added Pause & Resume Slider Button
+
+# code link : https://github.com/shadreza/fancy-slider-resolving
+
+# livesite link : https://shadreza.github.io/fancy-slider-resolving/
